@@ -10,7 +10,7 @@ defmodule CraicStackTest do
     {:ok, stack} = CraicStack.new
 
     stack
-    |>  Stack.push "bants"
+    |>  CraicStack.push "bants"
 
     assert "bants" == CraicStack.pop(stack)
   end
