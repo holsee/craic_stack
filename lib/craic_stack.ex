@@ -1,9 +1,10 @@
 defmodule CraicStack do
   def new do
-    :not_implemented
+    ref = Process.spawn(&loop/0, [])
+    {:ok, ref}
   end
 
-  def push(stack, craic) do
+  def push(stack, value) do
     :not_implemented
   end
 
@@ -14,4 +15,8 @@ defmodule CraicStack do
   def peek(stack) do
     :not_implemented
   end
+
+  defp loop do
+  end
+
 end
