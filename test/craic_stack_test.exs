@@ -36,6 +36,4 @@ defmodule CraicStackTest do
     assert "wow" == CraicStack.pop(stack)
   end
 
-
-
 end
