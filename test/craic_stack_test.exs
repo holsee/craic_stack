@@ -15,7 +15,7 @@ defmodule CraicStackTest do
     assert "bants" == CraicStack.pop(stack)
   end
 
-  test "Can peek onto the stack" do
+  test "can peek onto the stack" do
     {:ok, stack} = CraicStack.new
 
     stack
@@ -24,5 +24,18 @@ defmodule CraicStackTest do
     assert "wow" == CraicStack.peek(stack)
     assert "wow" == CraicStack.peek(stack)
   end
+
+  test "can pop from the stack" do
+    {:ok, stack} = CraicStack.new
+
+    stack
+    |> CraicStack.push "wow"
+    |> CraicStack.push "wee"
+
+    assert "wee" == CraicStack.pop(stack)
+    assert "wow" == CraicStack.pop(stack)
+  end
+
+
 
 end
