@@ -36,4 +36,21 @@ defmodule CraicStackTest do
     assert "wow" == CraicStack.pop(stack)
   end
 
+  test "can count the items in the stack" do
+    {:ok, stack} = CraicStack.new
+
+    assert 0 == CraicStack.count(stack)
+
+    stack
+    |> CraicStack.push("1")
+    |> CraicStack.push("2")
+
+    assert 2 == CraicStack.count(stack)
+
+    stack
+    |> CraicStack.pop
+
+    assert 1 == CraicStack.count(stack)
+  end
+
 end
