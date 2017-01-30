@@ -1,4 +1,5 @@
 defmodule CraicStack do
+
   def new do
     state = %{store: []}
     ref = Process.spawn(__MODULE__, :loop, [state], [])
@@ -24,20 +25,36 @@ defmodule CraicStack do
     end
   end
 
+  def count(stack) do
+    send(stack, {:count, self()})
+    receive do
+      {{:count_reply, value}, ^stack} -> value
+    end
+  end
+
   @doc false
   def loop(state) do
-    store = receive do
-      {:push, value} -> [value | state.store]
-      {:pop, from} ->
-        [head | tail] = state.store
-        send(from, {{:pop_reply, head}, self()})
-        tail
-      {:peek, from} ->
-        [head | _tail] = state.store
-        send(from, {{:peek_reply, head}, self()})
-        state.store
-    end
-    loop(%{state| store: store})
+    loop(receive do
+      {:push, value} -> handle({:push, value}, state)
+      {:pop, from}   -> handle(:pop, from, state)
+      {:peek, from}  -> handle(:peek, from, state)
+    end)
+  end
+
+  defp handle({:push, value}, state) do
+    %{state | store: [value | state.store]}
+  end
+
+  defp handle(:pop, from, state) do
+    [head | tail] = state.store
+    send(from, {{:pop_reply, head}, self()})
+    %{state | store: tail}
+  end
+
+  defp handle(:peek, from, state) do
+    [head | _tail] = state.store
+    send(from, {{:peek_reply, head}, self()})
+    state
   end
 
 end
