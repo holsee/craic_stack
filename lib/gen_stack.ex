@@ -9,11 +9,12 @@ defmodule GenStack do
   end
 
   def push(stack, value) do
-    :not_implemented
+    GenServer.cast(stack, {:push, value})
+    stack
   end
 
   def pop(stack) do
-    :not_implemented
+    GenServer.call(stack, :pop)
   end
 
   def peek(stack) do
@@ -25,5 +26,16 @@ defmodule GenStack do
   end
 
   # GenServer Callbacks
+
+  def handle_cast({:push, value}, state) do
+    {:noreply, %{state | store: [value | state.store],
+                         count: state.count + 1}}
+  end
+
+  def handle_call(:pop, _from, state) do
+    [head | tail] = state.store
+    {:reply, head, %{state | store: tail,
+                             count: state.count - 1}}
+  end
 
 end
