@@ -1,9 +1,11 @@
 defmodule GenStack do
+  use GenServer
 
   # API
 
   def new do
-    :not_implemented
+    state = %{store: [], count: 0}
+    GenServer.start(__MODULE__, state)
   end
 
   def push(stack, value) do
@@ -23,6 +25,5 @@ defmodule GenStack do
   end
 
   # GenServer Callbacks
-
 
 end
