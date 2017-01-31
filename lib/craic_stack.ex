@@ -11,10 +11,16 @@ defmodule CraicStack do
     stack
   end
 
-  def pop(stack) do
-    send(stack, {:pop, self()})
-    receive do
-      {{:pop_reply, value}, ^stack} -> value
+  def pop(stack, timeout \\ 5000) do
+    unless Process.alive?(stack) do
+      :dead
+    else
+      send(stack, {:pop, self()})
+      receive do
+        {{:pop_reply, value}, ^stack} -> value
+      after timeout ->
+        :timeout
+      end
     end
   end
 
