@@ -22,7 +22,7 @@ defmodule GenStack do
   end
 
   def count(stack) do
-    :not_implemented
+    GenServer.call(stack, :count)
   end
 
   # GenServer Callbacks
@@ -41,6 +41,10 @@ defmodule GenStack do
   def handle_call(:peek, _from, state) do
     [head | _] = state.store
     {:reply, head, state}
+  end
+
+  def handle_call(:count, _from, state) do
+    {:reply, state.count, state}
   end
 
 end
