@@ -2,7 +2,7 @@ defmodule CraicStack.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :stack_app,
+    [app: :craic_stack,
      version: "0.1.0",
      elixir: "~> 1.4-rc",
      build_embedded: Mix.env == :prod,
@@ -15,7 +15,7 @@ defmodule CraicStack.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger]]
+    [mod: {StackApp, []}, extra_applications: [:logger]]
   end
 
   # Dependencies can be Hex packages:

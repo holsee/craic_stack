@@ -7,12 +7,12 @@ defmodule GenStack do
 
   def new, do: start()
 
-  def start do
-    GenServer.start_link(__MODULE__, @default_state)
+  def start(opts \\ []) do
+    GenServer.start_link(__MODULE__, @default_state, opts)
   end
 
-  def start_link do
-    GenServer.start_link(__MODULE__, @default_state)
+  def start_link(opts \\ []) do
+    GenServer.start_link(__MODULE__, @default_state, opts)
   end
 
   def push(stack, value) do
