@@ -2,7 +2,7 @@ defmodule CraicStack.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :craic_stack,
+    [app: :stack_app,
      version: "0.1.0",
      elixir: "~> 1.4-rc",
      build_embedded: Mix.env == :prod,

@@ -1,11 +1,18 @@
 defmodule GenStack do
   use GenServer
 
+  @default_state %{store: [], count: 0}
+
   # API
 
-  def new do
-    state = %{store: [], count: 0}
-    GenServer.start(__MODULE__, state)
+  def new, do: start()
+
+  def start do
+    GenServer.start_link(__MODULE__, @default_state)
+  end
+
+  def start_link do
+    GenServer.start_link(__MODULE__, @default_state)
   end
 
   def push(stack, value) do
