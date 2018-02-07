@@ -1,6 +1,6 @@
 # CraicStack
 
-Code for talk: https://slides.com/stevenholdsworth/otp
+Code for talk: https://slides.com/holsee/otp
 
 ## Installation
 
